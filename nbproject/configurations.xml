@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="include">
+        <in>DB.h</in>
+      </df>
+      <df name="msg">
+        <in>ItemPair.msg</in>
+        <in>PassengerInfo.msg</in>
+      </df>
+      <df name="src">
+        <in>BCBP_Item.cpp</in>
+        <in>BCBP_Parser.cpp</in>
+        <in>BCStringProducer.cpp</in>
+        <in>BarcodeStringHandler.cpp</in>
+        <in>DB.cpp</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>CMakeLists.txt</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <cTool>
+            <incDir>
+              <pElem>.</pElem>
+              <pElem>include</pElem>
+              <pElem>/usr/local/include/cppconn</pElem>
+            </incDir>
+          </cTool>
+          <ccTool>
+            <standard>8</standard>
+            <incDir>
+              <pElem>.</pElem>
+              <pElem>include</pElem>
+              <pElem>/usr/local/include/cppconn</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="include/DB.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="msg/ItemPair.msg" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="msg/PassengerInfo.msg" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/BCBP_Item.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/BCBP_Parser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/BCStringProducer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/BarcodeStringHandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/DB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
