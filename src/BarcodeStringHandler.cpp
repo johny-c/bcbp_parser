@@ -25,8 +25,8 @@ class BarcodeStringHandler
             ROS_INFO("I heard: [%s]", msg->data.c_str());
 
             //list<BCBP_Item> items = 
-            bcbpp::parse(msg->data);
-            bcbpp::printTable();
+            //bcbpp::parse(msg->data);
+            //bcbpp::printTable();
 
             map<string, string> infoMap = bcbpp::getDesiredMap();
             bcbpp::printMap();
@@ -71,6 +71,7 @@ class BarcodeStringHandler
       ros::Publisher pub;
       ros::Subscriber sub;
       DB db;
+      BarcodeStringParser bcsp;
 
 };
 

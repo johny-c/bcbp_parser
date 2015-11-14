@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 #include "BCBP_Item.h"
-#include "BCBP_Parser.h"
+//#include "BCBP_Parser.h"
 #include "boost/date_time/gregorian/gregorian.hpp"
 
 using namespace std;
@@ -289,7 +289,7 @@ namespace bcbpp{
         for (int i=0; i < 5; ++i){
             BCBP_Item item = *it;
             //mMap.insert ( pair<int,string>(item.GetId(), item.GetData()) );
-            
+            using namespace bcbp;
             if (item.GetId() == DATE_OF_FLIGHT_JULIAN_DATE_ID){
                 int dayOfYear = stoi(item.GetData());
                 using namespace boost::gregorian;

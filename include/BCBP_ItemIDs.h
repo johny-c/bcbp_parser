@@ -52,7 +52,7 @@
 */
 
 
-namespace bpitemids{
+namespace bcbp{
     
 const int FORMAT_CODE_ID(1);
 const int NUMBER_OF_LEGS_ENCODED_ID(5);

@@ -11,6 +11,8 @@ using std::cout;
 using std::setw;
 using std::string;
 
+using namespace bcbp;
+
 
 BCBP_Item::BCBP_Item() {}
 
@@ -18,7 +20,7 @@ BCBP_Item::BCBP_Item(int no, unsigned int order, string desc, unsigned int fs, i
 : id(no), ordering(order), description(desc), fieldSize(fs), unique(u) {}
 
 BCBP_Item::BCBP_Item(int no) : id(no) {
-    using namespace bpitemids;
+    
  switch(id) {
      /* BCBP_SectionType::MANDATORY ITEMS */		
      // Unique

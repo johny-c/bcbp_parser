@@ -16,7 +16,7 @@
 using std::map;
 using std::list;
 using std::string;
-using namespace bpitemids;
+using namespace bcbp;
 
 
 namespace bcbpp{
