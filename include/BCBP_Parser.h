@@ -49,7 +49,7 @@ private:
         static BCBP_Parser* singleton;       
   
 public:        
-        list<BCBP_Item> parse(const string barcodeString); 
+        list<BCBP_Item> parse(const string& barcodeString); 
         static BCBP_Parser* getInstance();
         
 };

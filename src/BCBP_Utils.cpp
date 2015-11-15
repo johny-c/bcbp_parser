@@ -179,7 +179,7 @@ namespace bcbp_utils {
 
 
     /* Get desired fields out of parsed barcode string */
-    list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items) {
+    list<BCBP_Item> extractDesiredItems(const list<BCBP_Item>& items) {
         using namespace bcbp;
         list<BCBP_Item> desiredItems;
         
@@ -238,8 +238,7 @@ namespace bcbp_utils {
         while ((*it).GetId() != OPERATING_CARRIER_PNR_CODE_ID){
             --it;
         }
-        BCBP_Item tm = *it;
-        cout << "Current item in iterator: " << tm.GetDescription() << '\n';
+        //cout << "Current item in iterator: " << (*it).GetDescription() << '\n';
 
         //    OPERATING_CARRIER_PNR_CODE_ID ,
         //    FROM_CITY_AIRPORT_CODE_ID ,

@@ -194,7 +194,7 @@ int BCBP_Parser::parseSection(BCBP_SectionType type) {
  * @param str
  * @return a container of BCBP_Items
  */
-list<BCBP_Item> BCBP_Parser::parse(const string str) {
+list<BCBP_Item> BCBP_Parser::parse(const string& str) {
 
     reset();
     barcodeString = str;

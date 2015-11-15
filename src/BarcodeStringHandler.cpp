@@ -26,7 +26,7 @@ public:
         //Topic you want to subscribe
         sub = n.subscribe("/barcode_string_topic", 1, &BarcodeStringHandler::callback, this);
 
-        bcsp = BCBP_Parser::getInstance();
+        parser = BCBP_Parser::getInstance();
 
         this->useDB = useDB;
         if (useDB){
@@ -38,7 +38,7 @@ public:
         ROS_INFO("Now parsing: [%s]", msg->data.c_str());
 
         /* Parse all items according to BCBP protocol */
-        list<BCBP_Item> items = bcsp->parse(msg->data);
+        list<BCBP_Item> items = parser->parse(msg->data);
         printTable(items);
 
         /* Extract the items we are interested in */
@@ -101,7 +101,7 @@ private:
     ros::Publisher pub;
     ros::Subscriber sub;
     DB* db;
-    BCBP_Parser* bcsp;
+    BCBP_Parser* parser;
     bool useDB;
 };
 

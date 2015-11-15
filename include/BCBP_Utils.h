@@ -43,7 +43,7 @@ string extractCompartmentCode(char c);
 string extractPassengerStatus(char c);
 
 /* Extract desired items out of items from parsed string */
-list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items);
+list<BCBP_Item> extractDesiredItems(const list<BCBP_Item>& items);
 
 /* Convert a list of items to a map */
 map<int, string> listToMap(const list<BCBP_Item>& items);
