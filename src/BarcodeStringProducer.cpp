@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 
     ros::Publisher bcstring_pub = n.advertise<std_msgs::String>("/barcode_string_topic", 1000);
 
-    ros::Rate loop_rate( 1.0/15 ); // Send once every 15 seconds
+    ros::Rate loop_rate( 1.0/10 ); // Send once every 15 seconds
 
     int count = 0;
     while (ros::ok()) {
