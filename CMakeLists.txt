@@ -94,7 +94,7 @@ catkin_package(
 #include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 include_directories(include cppconn ${catkin_INCLUDE_DIRS})
 
-set(CMAKE_VERBOSE_MAKEFILE TRUE)
+#set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 ## Declare a C++ library
 # add_library(bcbp
@@ -121,9 +121,9 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 add_dependencies(talker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 add_executable(listener 
-                src/BarcodeStringParser.cpp
-                src/BarcodeStringHandler.cpp 
-                #src/BCBP_Parser.cpp 
+                src/BarcodeStringHandler.cpp
+                src/BCBP_Utils.cpp
+                src/BCBP_Parser.cpp 
                 src/BCBP_Item.cpp 
                 src/DB.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES} mysqlcppconn)

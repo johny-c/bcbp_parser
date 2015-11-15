@@ -72,10 +72,10 @@ string DB::queryGate(const string flightCarrier, const string flightNumber) {
 		res = stmt->executeQuery( query );
 		
 		while (res->next()) {
-		  cout << "\t... MySQL replies: ";
+		  //cout << "\t... MySQL replies: ";
 		  /* Access column data by alias or column name */
 		  const string str = res->getString(FLIGHT_GATE_FIELD_NAME);
-		  cout << str << '\n';
+		  //cout << str << '\n';
 		  return str;
 		  /* Access column fata by numeric offset, 1 is the first column */
 		  //cout << res->getString(1) << endl;
