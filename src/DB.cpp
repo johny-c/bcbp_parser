@@ -34,11 +34,11 @@ DB::DB(){
 		cout << "Connected to db " << DB_NAME << '\n';
 	}
 	catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		cerr << "# ERR: SQLException in " << __FILE__;
+		cerr << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		cerr << "# ERR: " << e.what();
+		cerr << " (MySQL error code: " << e.getErrorCode();
+		cerr << ", SQLState: " << e.getSQLState() << " )" << endl;
 	}
         
         res = nullptr;
@@ -82,11 +82,11 @@ string DB::queryGate(const string flightCarrier, const string flightNumber) {
 		}
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		cerr << "# ERR: SQLException in " << __FILE__;
+		cerr << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		cerr << "# ERR: " << e.what();
+		cerr << " (MySQL error code: " << e.getErrorCode();
+		cerr << ", SQLState: " << e.getSQLState() << " )" << endl;
 	}
 
 
@@ -118,11 +118,11 @@ string DB::queryGate(const string flightCode) {
 		}
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		cerr << "# ERR: SQLException in " << __FILE__;
+		cerr << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		cerr << "# ERR: " << e.what();
+		cerr << " (MySQL error code: " << e.getErrorCode();
+		cerr << ", SQLState: " << e.getSQLState() << " )" << endl;
 	}
 
 

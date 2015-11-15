@@ -56,11 +56,12 @@ namespace bcbp_utils {
         boost::algorithm::trim(passengerName);
         static const string delimiter = "/";
         int splitPos = passengerName.find(delimiter);
-        //        const string lastName = passengerName.substr(0, splitPos);
-        //        const string firstName = passengerName.substr(splitPos+1, passengerName.length());
-        //        mMap.insert ( pair<int,string>(PASSENGER_NAME_ID, passengerName) );
-
-        passengerName.replace(splitPos, delimiter.length(), " ");
+        const string lastName = passengerName.substr(0, splitPos);
+        const string firstName = 
+        passengerName.substr(splitPos+delimiter.length(), passengerName.length());
+ 
+        passengerName = firstName + " " + lastName;
+        //passengerName.replace(splitPos, delimiter.length(), " ");
         return passengerName;
     }
 
@@ -162,7 +163,7 @@ namespace bcbp_utils {
         }
     }
 
-    /* Return the item with the matching id */
+    /* Find the item with the matching id */
     list<BCBP_Item>::const_iterator findItemById(const list<BCBP_Item>& itemList, int itemId) {
         //BCBP_Item res;
         list<BCBP_Item>::const_iterator it;
@@ -176,21 +177,6 @@ namespace bcbp_utils {
     }
    
 
-    //const vector<int> desiredItemIDs = 
-    //{
-    //    PASSENGER_NAME_ID ,
-    //    OPERATING_CARRIER_PNR_CODE_ID ,
-    //    FROM_CITY_AIRPORT_CODE_ID ,
-    //    TO_CITY_AIRPORT_CODE_ID,
-    //    OPERATING_CARRIER_DESIGNATOR_ID ,
-    //    FLIGHT_NUMBER_ID ,
-    //    DATE_OF_FLIGHT_JULIAN_DATE_ID ,
-    //    COMPARTMENT_CODE_ID ,
-    //    SEAT_NUMBER_ID ,
-    //    CHECKIN_SEQUENCE_NUMBER_ID ,
-    //    PASSENGER_STATUS_ID ,
-    //    PASSENGER_DESCRIPTION_ID
-    //};
 
     /* Get desired fields out of parsed barcode string */
     list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items) {
@@ -210,7 +196,7 @@ namespace bcbp_utils {
         // For passenger description (gender)       
         list<BCBP_Item>::const_iterator it2 = findItemById(items, PASSENGER_DESCRIPTION_ID);
         if (it2 != items.end()){
-            cout << "Found passenger description by id\n";
+            //cout << "Found passenger description by id\n";
             BCBP_Item passengerDescriptionItem = *it2;
             string passengerDescr = passengerDescriptionItem.GetData();
             if (passengerDescr.length() > 0) { // If it is included   
@@ -220,7 +206,7 @@ namespace bcbp_utils {
             desiredItems.push_back(passengerDescriptionItem);
         }
         else{
-            cout << "Did not Found passenger description by id\n";
+            //cout << "Did not Found passenger description by id\n";
         }
 
         
@@ -242,15 +228,16 @@ namespace bcbp_utils {
         }
 
         if (!amsterdamDeparture) {
-            cout << "AMS DEPARTURE NOT FOUND\n\n";
+            //cout << "AMS DEPARTURE NOT FOUND\n\n";
             return desiredItems;
         }
 
         // Flight leg found
+        //cout << "AMS DEPARTURE FOUND\n\n";
         // Go one item back, to OPERATING_CARRIER_PNR_CODE_ID
-        --it;
-        cout << "AMS DEPARTURE FOUND\n\n";
-        
+        while ((*it).GetId() != OPERATING_CARRIER_PNR_CODE_ID){
+            --it;
+        }
         BCBP_Item tm = *it;
         cout << "Current item in iterator: " << tm.GetDescription() << '\n';
 
@@ -265,18 +252,9 @@ namespace bcbp_utils {
         //    CHECKIN_SEQUENCE_NUMBER_ID ,
         //    PASSENGER_STATUS_ID ,    
 
+        while ((*it).getSectionType() == BCBP_SectionType::MANDATORY) {
 
-        // ticketNumber, airportDep, airportArr, flightCarrier, flightNumber
-        for (int i = 0; i < 5; ++i) {
             BCBP_Item item = *it;
-            desiredItems.push_back(item);
-            ++it;
-        }
-
-        // flightDate, compartmentCode, seatNumber, checkinSequence, passengerStatus
-        for (int i = 0; i < 5; ++i) {
-            BCBP_Item item = *it;
-
             switch (item.GetId()) {
                 case DATE_OF_FLIGHT_JULIAN_DATE_ID:
                 {
@@ -297,6 +275,11 @@ namespace bcbp_utils {
                     break;
 
                 case SEAT_NUMBER_ID:
+                case OPERATING_CARRIER_PNR_CODE_ID:
+                case FROM_CITY_AIRPORT_CODE_ID:
+                case TO_CITY_AIRPORT_CODE_ID:
+                case OPERATING_CARRIER_DESIGNATOR_ID:
+                case FLIGHT_NUMBER_ID:                                       
                 {
                     desiredItems.push_back(item);
                 }

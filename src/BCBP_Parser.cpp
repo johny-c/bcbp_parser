@@ -1,7 +1,6 @@
 #include <iostream>
 #include <list>
 #include <string>
-#include <map>
 #include "BCBP_Utils.h"
 #include "BCBP_Item.h"
 #include "BCBP_Parser.h"
@@ -53,20 +52,8 @@ void BCBP_Parser::reset() {
     itemList.clear();
 }
 
-
-
-BCBP_Item BCBP_Parser::getItem(int itemId) {
-    BCBP_Item res;
-    for (list<BCBP_Item>::const_iterator it = itemList.begin(); it != itemList.end(); ++it) {
-        if (it->GetId() == itemId) {
-            res = *it; 
-            return res;
-        }
-    }
-    return res;
-}
-
-int BCBP_Parser::parseItem(BCBP_Item &item) {
+/* Parse a single item */
+int BCBP_Parser::parseItem(BCBP_Item& item) {
     int fieldSize = item.GetFieldSize();
     string data = barcodeString.substr(curPos, fieldSize);
     item.SetData(data);
@@ -76,7 +63,11 @@ int BCBP_Parser::parseItem(BCBP_Item &item) {
     return fieldSize;
 }
 
-int BCBP_Parser::parseStructuredMessage(list<int>::const_iterator &it) {
+/* Parse a structured message 
+ * iterator it indicates initial position
+ * the first 2 fields indicate the message size
+ */
+int BCBP_Parser::parseStructuredMessage(list<int>::const_iterator& it) {
     // Parse header to get size of message
     BCBP_Item item(*it);
     int headerLength = parseItem(item);
@@ -96,6 +87,10 @@ int BCBP_Parser::parseStructuredMessage(list<int>::const_iterator &it) {
     return curMessagePos + headerLength;
 }
 
+/**
+ * Parse a section with conditional items
+ * @return size of section 
+ */
 int BCBP_Parser::parseConditionalSection() {
 
     int curSectionPos = 0;
@@ -194,7 +189,11 @@ int BCBP_Parser::parseSection(BCBP_SectionType type) {
 
 }
 
-/* Parse a provided barcode string  */
+/**
+ * Parse a provided barcode string 
+ * @param str
+ * @return a container of BCBP_Items
+ */
 list<BCBP_Item> BCBP_Parser::parse(const string str) {
 
     reset();

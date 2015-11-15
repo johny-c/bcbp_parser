@@ -35,7 +35,7 @@ public:
     }
 
     void callback(const std_msgs::String::ConstPtr& msg) {
-        ROS_INFO("I heard: [%s]", msg->data.c_str());
+        ROS_INFO("Now parsing: [%s]", msg->data.c_str());
 
         /* Parse all items according to BCBP protocol */
         list<BCBP_Item> items = bcsp->parse(msg->data);
@@ -66,11 +66,12 @@ public:
             airDep = desiredMap.at(FROM_CITY_AIRPORT_CODE_ID);
         }
         catch (std::exception &cException) {
-            std::cerr << "Standard exception: " << cException.what() << '\n';
+            std::cerr << "Standard exception: " << cException.what() << '\n'
+                      << "--Airport of departure\n";
         }
         
 
-        if (useDB && airDep!=""){
+        if (useDB && airDep=="AMS"){
             
             const string flightCarrier = desiredMap.at(OPERATING_CARRIER_DESIGNATOR_ID);
             const string flightNumber = desiredMap.at(FLIGHT_NUMBER_ID); 
