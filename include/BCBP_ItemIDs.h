@@ -97,8 +97,8 @@ const int SECURITY_DATA_ID(30);
 
 }
 
-// We define this for our own use since it's not included in BCBP
-const int GATE_ID(123);
+// We define this for our own use since it's not included in the BCBP protocol
+const int GATE_ID(999);
 
 #endif	/* BCBP_ITEMIDS_H */
 

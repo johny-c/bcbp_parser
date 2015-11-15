@@ -14,10 +14,10 @@ DB* DB::getInstance() {
     if(! instanceFlag) {
         singleton = new DB();
         instanceFlag = true;
-        cout << "Created DB Singleton!\n\n";
+        //cout << "Created DB Singleton!\n\n";
     }
 
-    cout << "DB Singleton exists already!\n\n";
+    //cout << "DB Singleton exists already!\n\n";
     return singleton;
 }
 
@@ -27,9 +27,9 @@ DB::DB(){
 
 	try{
 		driver = get_driver_instance();
-                cout << "Got a mysql cppconn driver instance\n";
+                //cout << "Got a mysql cppconn driver instance\n";
 		con = driver->connect(DB_HOST, DB_USER, DB_PASS);
-		cout << "Got a connection to MySQL\n";
+		//cout << "Got a connection to MySQL\n";
 		con->setSchema(DB_NAME);
 		cout << "Connected to db " << DB_NAME << '\n';
 	}

@@ -21,13 +21,12 @@
 #include "BCBP_Item.h"
 #include "BCBP_ItemIDs.h"
 
+
 using std::map;
 using std::list;
 using std::string;
 
-
-
-class BarcodeStringParser {
+class BCBP_Parser {
     
 private:
         int curLeg;
@@ -44,16 +43,17 @@ private:
         BCBP_Item getItem(int);   
         void reset();
         
-        BarcodeStringParser();  
-        ~BarcodeStringParser();
+        
+        BCBP_Parser();  
+        ~BCBP_Parser();
         static bool instanceFlag;
-        static BarcodeStringParser* singleton;       
+        static BCBP_Parser* singleton;       
   
 public:        
         list<BCBP_Item> parse(const string barcodeString); 
-        static BarcodeStringParser* getInstance();
+        static BCBP_Parser* getInstance();
         
-        list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items);
+        //list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items);
         
 };
 

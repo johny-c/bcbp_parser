@@ -15,7 +15,7 @@
 
 using std::string;
 
-enum class BCBP_SectionType {MANDATORY, CONDITIONAL, SECURITY};
+enum class BCBP_SectionType {MANDATORY, CONDITIONAL, SECURITY, NONE};
 
 
 class BCBP_Item {
@@ -65,8 +65,8 @@ public:
         this->sectionType = sectionType;
     }
 
-    static std::array<int, 6> fieldWidths;
-    static std::array<string, 6> fieldNames;
+    static std::array<int, 7> fieldWidths;
+    static std::array<string, 7> fieldNames;
 
 private:
 	int id;

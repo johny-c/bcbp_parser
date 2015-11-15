@@ -116,18 +116,18 @@ include_directories(include cppconn ${catkin_INCLUDE_DIRS})
 # target_link_libraries(bcbp_node ${catkin_LIBRARIES})
 
 
-add_executable(talker src/BCStringProducer.cpp)
-target_link_libraries(talker ${catkin_LIBRARIES})
-add_dependencies(talker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_executable(barcode_string_producer src/BarcodeStringProducer.cpp)
+target_link_libraries(barcode_string_producer ${catkin_LIBRARIES})
+add_dependencies(barcode_string_producer ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_executable(listener 
+add_executable(barcode_string_handler
                 src/BarcodeStringHandler.cpp
                 src/BCBP_Utils.cpp
                 src/BCBP_Parser.cpp 
                 src/BCBP_Item.cpp 
                 src/DB.cpp)
-target_link_libraries(listener ${catkin_LIBRARIES} mysqlcppconn)
-add_dependencies(listener ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(barcode_string_handler ${catkin_LIBRARIES} mysqlcppconn)
+add_dependencies(barcode_string_handler ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
 

@@ -38,12 +38,14 @@ string extractCompartmentCode(char c);
 /* Extract current passenger status */
 string extractPassengerStatus(char c);
 
+list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items);
 
-map<int, string> getDesiredMapId(list<BCBP_Item> items);
-map<string, string> getDesiredMapDescr(list<BCBP_Item> items);
+map<int, string> listToMap(const list<BCBP_Item>& items);
+
+list<BCBP_Item>::const_iterator findItemById(const list<BCBP_Item>& itemList, int itemId);
 
 /* Print BCBP items as a table */
-void printTable(list<BCBP_Item> itemList);
+void printTable(const list<BCBP_Item>& itemList);
 
 }
 

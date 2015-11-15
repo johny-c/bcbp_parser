@@ -24,9 +24,9 @@ public:
         pub = n.advertise<bcbp::PassengerInfo>("/passenger_info_topic", 1000);
 
         //Topic you want to subscribe
-        sub = n.subscribe("/chatter", 1, &BarcodeStringHandler::callback, this);
+        sub = n.subscribe("/barcode_string_topic", 1, &BarcodeStringHandler::callback, this);
 
-        bcsp = BarcodeStringParser::getInstance();
+        bcsp = BCBP_Parser::getInstance();
 
         this->useDB = useDB;
         if (useDB){
@@ -40,49 +40,53 @@ public:
         /* Parse all items according to BCBP protocol */
         list<BCBP_Item> items = bcsp->parse(msg->data);
         printTable(items);
-        
+
         /* Extract the items we are interested in */
-        list<BCBP_Item> desiredItems = bcsp->extractDesiredItems(items);
+        list<BCBP_Item> desiredItems = extractDesiredItems(items);
         printTable(desiredItems);
         
         /* Construct custom ROS message */
         
         /* Get a map (id => content) for the desired items */
-        map<int, string> desiredMap = getDesiredMapId(desiredItems);
+        map<int, string> desiredMap = listToMap(desiredItems);
+        //map<string, string> desiredMap = getDesiredMapDescr(desiredItems);
         
         bcbp::PassengerInfo pinfo;
-        for (std::map<int,string>::iterator it=desiredMap.begin(); it!=desiredMap.end(); ++it){
+        for (std::map<int, string>::iterator it=desiredMap.begin(); it!=desiredMap.end(); ++it){
 
             bcbp::PassengerInfoItem pii;
-            pii.id = it->first;
-            //pii.description = it->first; 
+            //pii.id = it->first;
+            pii.description = BCBP_Item(it->first).GetDescription(); 
             pii.data = it->second;
             pinfo.items.push_back(pii);          
         }
         
+        string airDep = "";
+        try {
+            airDep = desiredMap.at(FROM_CITY_AIRPORT_CODE_ID);
+        }
+        catch (std::exception &cException) {
+            std::cerr << "Standard exception: " << cException.what() << '\n';
+        }
+        
 
-        if (useDB){
-            // Extract flight carrier and flight number fields
-//            const string flightCarrierKey = BCBP_Item(OPERATING_CARRIER_DESIGNATOR_ID).GetDescription();
-//            const string flightCarrier = desiredMap.at(flightCarrierKey);
-//            const string flightNumberKey = BCBP_Item(FLIGHT_NUMBER_ID).GetDescription();
-//            const string flightNumber = desiredMap.at(flightNumberKey); 
+        if (useDB && airDep!=""){
             
             const string flightCarrier = desiredMap.at(OPERATING_CARRIER_DESIGNATOR_ID);
             const string flightNumber = desiredMap.at(FLIGHT_NUMBER_ID); 
 
             // Example of using a field from a DB query
             const string flightGate = db->queryGate(flightCarrier, flightNumber);
+            ROS_INFO("DB responds gate: [%s]", flightGate.c_str());
+            
             bcbp::PassengerInfoItem pii;
-            pii.id = GATE_ID;
-            //pii.description = "Gate";
+            //pii.id = GATE_ID;
+            pii.description = BCBP_Item(GATE_ID).GetDescription();
             pii.data = flightGate;
             pinfo.items.push_back(pii);
-
-            ROS_INFO("DB responds gate: [%s]", flightGate.c_str());
         }
 
-            pub.publish(pinfo);
+        pub.publish(pinfo);
     }
 
 private:
@@ -90,7 +94,7 @@ private:
     ros::Publisher pub;
     ros::Subscriber sub;
     DB* db;
-    BarcodeStringParser* bcsp;
+    BCBP_Parser* bcsp;
     bool useDB;
 };
 
@@ -101,7 +105,7 @@ using std::cin;
 
 int main(int argc, char **argv) {
     //Initiate ROS
-    ros::init(argc, argv, "listener");
+    ros::init(argc, argv, "barcode_string_handler");
 
     string input = "";
     char reply = {0};
@@ -123,8 +127,7 @@ int main(int argc, char **argv) {
         cout << "No DB will be used.\n";
     }
 
-    //Create an object of class SubscribeAndPublish that will take care of everything
-    
+
     BarcodeStringHandler barcodeStringHandler(useDB);
     /**
      * ros::spin() will enter a loop, pumping callbacks.  With this version, all
