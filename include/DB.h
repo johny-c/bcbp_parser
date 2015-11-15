@@ -33,9 +33,7 @@ static const string STD_QUERY_STR = "SELECT " + FLIGHT_GATE_FIELD_NAME
 class DB
 {
 	public:
-		DB ();
-		virtual ~DB ();
-
+                static DB* getInstance();
 		string queryGate(string flightCode);
 		string queryGate(string flightCarrier, string flightNumber);
 
@@ -44,6 +42,12 @@ class DB
                 sql::Connection *con;
                 sql::Statement *stmt;
                 sql::ResultSet *res;
+                
+		DB ();
+		virtual ~DB ();
+                static bool instanceFlag;
+                static DB* singleton;                
+                
 };
 
 #endif	/* DB_H */

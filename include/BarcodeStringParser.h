@@ -43,15 +43,21 @@ private:
         int parseStructuredMessage(list<int>::const_iterator&);
         string getItem(int);
         void printTable();    
-        void printMap(map desiredItems);
+        //void printMap(map desiredItems);
         void reset();
         
-        BarcodeStringParser();
-        
+        BarcodeStringParser();  
+        ~BarcodeStringParser();
+        static bool instanceFlag;
+        static BarcodeStringParser* singleton;       
+  
 public:        
         list<BCBP_Item> parse(const string barcodeString); 
-        list<BCBP_Item> getDesiredItems(list<int> desiredItemsIDs);
-        map<string, string> getDesiredMap();
+        static BarcodeStringParser* getInstance();
+        
+        
+//        list<BCBP_Item> getDesiredItems(list<int> desiredItemsIDs);
+//        map<string, string> getDesiredMap();
 
 };
 

@@ -5,6 +5,24 @@
 using namespace std;
 
 
+
+
+bool DB::instanceFlag = false;
+DB* DB::singleton = nullptr;
+
+DB* DB::getInstance() {
+    if(! instanceFlag) {
+        singleton = new DB();
+        instanceFlag = true;
+        cout << "Created DB Singleton!\n\n";
+    }
+
+    cout << "DB Singleton exists already!\n\n";
+    return singleton;
+}
+
+
+
 DB::DB(){
 
 	try{
@@ -29,6 +47,7 @@ DB::DB(){
 
 
 DB::~DB(){
+        instanceFlag = false;
         delete res;
 	delete stmt;
 	delete con;

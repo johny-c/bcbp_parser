@@ -121,8 +121,9 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 add_dependencies(talker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 add_executable(listener 
+                src/BarcodeStringParser.cpp
                 src/BarcodeStringHandler.cpp 
-                src/BCBP_Parser.cpp 
+                #src/BCBP_Parser.cpp 
                 src/BCBP_Item.cpp 
                 src/DB.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES} mysqlcppconn)
