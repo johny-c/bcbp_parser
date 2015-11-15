@@ -29,19 +29,26 @@ namespace bcbp_utils{
 
 /* Get interpretation of Passenger Description field */
 string interpretPassengerDescription(char c);
+
 /* Convert day Of the year to Gregorian Date */
 string convertJulianToGregorianDate(int dayOfYear);
+
 /* Remove delimiters */
 string extractPassengerName(string passengerName);
+
 /* Extract flight class */
 string extractCompartmentCode(char c);
+
 /* Extract current passenger status */
 string extractPassengerStatus(char c);
 
+/* Extract desired items out of items from parsed string */
 list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items);
 
+/* Convert a list of items to a map */
 map<int, string> listToMap(const list<BCBP_Item>& items);
 
+/* Find an item in a container of items */
 list<BCBP_Item>::const_iterator findItemById(const list<BCBP_Item>& itemList, int itemId);
 
 /* Print BCBP items as a table */

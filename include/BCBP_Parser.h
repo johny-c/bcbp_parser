@@ -39,8 +39,7 @@ private:
         int parseSection(BCBP_SectionType);
         int parseConditionalSection();
         int parseItem(BCBP_Item&);
-        int parseStructuredMessage(list<int>::const_iterator&);
-        BCBP_Item getItem(int);   
+        int parseStructuredMessage(list<int>::const_iterator&);  
         void reset();
         
         
@@ -52,8 +51,6 @@ private:
 public:        
         list<BCBP_Item> parse(const string barcodeString); 
         static BCBP_Parser* getInstance();
-        
-        //list<BCBP_Item> extractDesiredItems(list<BCBP_Item> items);
         
 };
 

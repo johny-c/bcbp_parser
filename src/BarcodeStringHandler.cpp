@@ -56,7 +56,13 @@ public:
 
             bcbp::PassengerInfoItem pii;
             //pii.id = it->first;
-            pii.description = BCBP_Item(it->first).GetDescription(); 
+            if(it->first == DATE_OF_FLIGHT_JULIAN_DATE_ID){
+                pii.description = "Date of flight";
+            }
+            else{
+                pii.description = BCBP_Item(it->first).GetDescription();
+            }
+            
             pii.data = it->second;
             pinfo.items.push_back(pii);          
         }
@@ -67,7 +73,7 @@ public:
         }
         catch (std::exception &cException) {
             std::cerr << "Standard exception: " << cException.what() << '\n'
-                      << "--Airport of departure\n";
+                      << "--Different airport of departure\n";
         }
         
 
