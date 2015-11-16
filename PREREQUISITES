@@ -1,0 +1,7 @@
+You need mysql cpp connector. 
+I downloaded version 1.1.6 from http://dev.mysql.com/downloads/connector/cpp/. 
+Instructions are included in the INSTALL file of the package.
+I compiled the source and installed in /usr/local. 
+You also need mysql client (and server for the mock database if you want to create one).
+It works best with Boost 1.55. 
+The rest of the code needs c++11 compiler.
