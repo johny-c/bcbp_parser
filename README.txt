@@ -10,6 +10,5 @@ The package can also use a (mock) database to emulate information extraction
 such as the time of departure based on a ticket's flight number. To generate a 
 database, run the following in your shell:
 
-mysql < scripts/generate_air_db.sql
-
+mysql -u root -p < generate_air_db.sql
 
