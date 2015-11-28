@@ -1,7 +1,9 @@
+#include "ros/ros.h"
 #include <stdlib.h>
 #include <iostream>
 #include "DB.h"
- 
+
+
 using namespace std;
 
 
@@ -31,7 +33,7 @@ DB::DB(){
 		con = driver->connect(DB_HOST, DB_USER, DB_PASS);
 		//cout << "Got a connection to MySQL\n";
 		con->setSchema(DB_NAME);
-		cout << "Connected to db " << DB_NAME << '\n';
+		ROS_INFO("Connected to db: %s\n", DB_NAME.c_str());
 	}
 	catch (sql::SQLException &e) {
 		cerr << "# ERR: SQLException in " << __FILE__;
@@ -47,8 +49,8 @@ DB::DB(){
 
 
 DB::~DB(){
-        instanceFlag = false;
-        delete res;
+    instanceFlag = false;
+    delete res;
 	delete stmt;
 	delete con;
 }
@@ -62,13 +64,12 @@ string DB::queryGate(const string flightCarrier, const string flightNumber) {
 		
 		stmt = con->createStatement();
                 
-                const string query = STD_QUERY_STR 
+        const string query = STD_QUERY_STR 
                         + FLIGHT_CARRIER_FIELD_NAME + " = '" + flightCarrier + "'" 
                         + " AND "
                         + FLIGHT_NUMBER_FIELD_NAME  + " = " + flightNumber + "";
-		
-                cout << "Running MySQL query:\n" + query + '\n';
-                
+	
+        ROS_INFO("Running MySQL query:\n%s\n", query.c_str());            
 		res = stmt->executeQuery( query );
 		
 		while (res->next()) {

@@ -106,6 +106,23 @@ private:
 };
 
 
+bool askBinary(string question){
+    string input = "";
+    char reply = {0};
+    while (true) {
+        std::cout << question << " (y/n)?\n";
+        getline(std::cin, input);
+
+        if (input.length() == 1) {
+            reply = input[0];
+            break;
+        }
+        std::cout << "Invalid character, please try again\n";
+    }
+
+    return (reply == 'y');
+}
+
 
 using std::cout;
 using std::cin;
@@ -113,25 +130,13 @@ using std::cin;
 int main(int argc, char **argv) {
     //Initiate ROS
     ros::init(argc, argv, "barcode_string_handler");
-
-    string input = "";
-    char reply = {0};
-    while (true) {
-        cout << "Use DB (MySQL) to query flight information (y/n)?\n";
-        getline(cin, input);
-
-        if (input.length() == 1) {
-            reply = input[0];
-            break;
-        }
-        cout << "Invalid character, please try again\n";
-    }
-    bool useDB = (reply == 'y') ? true : false;
+    //bool useDB = askBinary("Use DB (MySQL) to query flight information");
+    bool useDB = true;
     if(useDB){
-        cout << "DB use will be attempted.\n";
+        ROS_INFO("DB use will be attempted.");
     }
     else{
-        cout << "No DB will be used.\n";
+        ROS_INFO("No DB will be used.");
     }
 
 

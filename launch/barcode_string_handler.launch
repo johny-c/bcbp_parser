@@ -1,0 +1,29 @@
+<launch>
+  <!-- local machine already has a definition by default. This tag overrides the default definition with specific ROS_ROOT and ROS_PACKAGE_PATH values -->
+  <!--               
+  <machine name="local_alt" address="localhost" default="true" 
+       ros-root="$(env ROS_ROOT)"
+       ros-package-path="$(env ROS_PACKAGE_PATH)" />
+  -->                
+ 
+ <!-- mock string producer node -->
+ <!-- type: an executable has to exist with the same value -->
+ <node name="barcode_string_producer" pkg="bcbp" ns="bcbpp" 
+       type="barcode_string_producer" args=""/>
+ <!-- subscriber+publisher node -->
+ <node name="barcode_string_handler" pkg="bcbp" ns="bcbpp" 
+       type="barcode_string_handler" args="dbuser dbpass"/>
+
+  <!--<include file="$(find 2dnav_pr2)/move_base/2dnav_pr2.launch" />
+  <param name="move_base/local_costmap/resolution" value="0.5"/>-->
+    
+    <!--<node pkg="rospy_tutorials" type="talker" name="talker"> -->
+      <!-- set a private parameter for the node -->
+      <!--<param name="talker_1_param" value="a value" /> -->
+      <!-- nodes can have their own remap args --> 
+      <!--<remap from="chatter" to="hello-1"/> -->
+      <!-- you can set environment variables for a node -->
+      <!--<env name="ENV_EXAMPLE" value="some value" /> -->
+    <!--</node> -->
+    
+</launch>
