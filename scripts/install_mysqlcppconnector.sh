@@ -11,9 +11,9 @@ sudo apt-get install mysql-server
 # Download and extract source code for mysql connector 1.1.6
 mkdir -p ~/Downloads
 cd ~/Downloads
-wget -o http://dev.mysql.com/get/Downloads/Connector-C++/mysql-connector-c++-1.1.6.tar.gz
+wget -nc http://dev.mysql.com/get/Downloads/Connector-C++/mysql-connector-c++-1.1.6.tar.gz
 tar -xvzf mysql-connector-c++-1.1.6.tar.gz
-
+cd mysql-connector-c++-1.1.6
 # The following is based on the INSTALL file included in the mysql-connector
 # Generate Makefile
 cmake .  # cmake -L to debug
@@ -32,17 +32,17 @@ make
 #make install # This fails
 
 # Unless you have changed the location in the configuration step, make install 
-copies the header files to the directory /usr/local/include. 
-The header files copied are mysql_connection.h and mysql_driver.h.
+#copies the header files to the directory /usr/local/include. 
+#The header files copied are mysql_connection.h and mysql_driver.h.
 
 sudo mkdir -p /usr/local/include/cppconn
 sudo cp -r cppconn/* /usr/local/include/cppconn/
 sudo cp driver/mysql_connection.h driver/mysql_driver.h /usr/local/include/
 
 # Again, unless you have specified otherwise, make install copies the library files 
-to /usr/local/lib. The files copied are the dynamic library libmysqlcppconn.so, 
-and the static library libmysqlcppconn-static.a. The extension of the dynamic 
-library might be different on your system (for example, .dylib on OS X). 
+#to /usr/local/lib. The files copied are the dynamic library libmysqlcppconn.so, 
+#and the static library libmysqlcppconn-static.a. The extension of the dynamic 
+#library might be different on your system (for example, .dylib on OS X). 
 
 sudo mkdir -p /usr/local/lib
 sudo cp driver/libmysqlcppconn* /usr/local/lib/
